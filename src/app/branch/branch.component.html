@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row pt-5">
+        <h1>List of Branches</h1>
+    </div>
+    <div class="row pt-3">
+        <div class="col table-responsive">
+            <table class="table table-bordered table-div text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">GitHub Link</th>
+                    <th scope="col">Protected</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider" *ngIf="!loading;else showLoading">
+                  <tr *ngFor="let branch of branches">
+                    <td scope="row">{{branch.name}}</td>
+                    <td><a [href]="branch.githubLink" target="_blank">{{branch.githubLink}}</a> </td>
+                    <td>
+                        <fa-icon *ngIf="branch.protected;else NotProtected" [icon]="faXmark"></fa-icon>
+                        <ng-template #NotProtected>
+                            <fa-icon [icon]="faXmark"></fa-icon>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <a [href]="branch.githubLink" target="_blank">
+                            <fa-icon [icon]="faEye"></fa-icon>
+                        </a>
+                    </td>
+                  </tr>
+                </tbody>
+                
+                <ng-template #showLoading>
+                    <tr>
+                        <td [colSpan]="4" class="text-center h3">
+                            Loading branches... <fa-icon [spin]="true" [icon]="faSpinner"></fa-icon>
+                        </td>
+                    </tr>
+                </ng-template>
+
+              </table>
+        </div>
+    </div>
+</div>
