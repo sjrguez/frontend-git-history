@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row pt-5">
+        <h1>List of Commit</h1>
+    </div>
+
+    <div class="row">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="'/'">Branches</a></li>
+              <li class="breadcrumb-item active">{{branchName}}</li>
+            </ol>
+          </nav>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col table-responsive" *ngIf="!errorInfo && !loadingBranch;else loadingOrError">
+            <table class="table table-bordered table-div text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Message</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-group-divider" *ngIf="!loadingCommits;else showLoading">
+                    <tr *ngFor="let commit of commits">
+                      <td>{{commit.message}}</td>
+                      <td>{{commit.author}}</td>
+                      <td>{{commit.date | date:'dd/MM/yyyy'}}</td>
+                      <td>
+                        <div>
+
+                            <span title="Redirect to github">
+                                <a [href]="commit.githubLink" target="_blank">
+                                    <fa-icon [icon]="faGithub"></fa-icon>
+                                </a>
+                            </span>
+                        </div>
+
+                      </td>
+                    </tr>
+                </tbody>
+                    
+                  <ng-template #showLoading>
+                    <tr>
+                        <td [colSpan]="4" class="text-center h3">
+                            Loading commits... <fa-icon [spin]="true" [icon]="faSpinner"></fa-icon>
+                        </td>
+                    </tr>
+                </ng-template>
+              </table>
+        </div>
+
+        <ng-template #loadingOrError >
+            <p *ngIf="loadingBranch" class="h2 text-center">
+                Loading branch infomation... <fa-icon [spin]="true" [icon]="faSpinner"></fa-icon>
+            </p>
+
+            <div *ngIf="errorInfo?.message" class="alert alert-danger" role="alert">
+                {{errorInfo.message}}
+              </div>
+        </ng-template>
+
+    </div>
+</div>

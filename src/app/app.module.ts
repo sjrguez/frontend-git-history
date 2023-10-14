@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BranchModule } from './branch/branch.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommitModule } from './commit/commit.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbModule,
     HttpClientModule,
     BranchModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CommitModule
   ],
   providers: [],
   bootstrap: [AppComponent]
