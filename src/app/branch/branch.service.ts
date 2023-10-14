@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Branch } from './models/branch.model';
 import { Observable } from 'rxjs';
+import { URL } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchService {
-  private url = 'http://localhost:5000/api/branch'
+  private url = `${URL}/api/branch`
   constructor(private http: HttpClient) {}
 
   getAllBranches(): Observable<Branch[]> {

@@ -31,6 +31,11 @@
                       <td>{{commit.date | date:'dd/MM/yyyy'}}</td>
                       <td>
                         <div>
+                            <span title="Show commit infomation">
+                                <a class="p-2" [routerLink]="['branch', commit.githubLink]">
+                                    <fa-icon [icon]="faEye"></fa-icon>
+                                </a>
+                            </span>
 
                             <span title="Redirect to github">
                                 <a [href]="commit.githubLink" target="_blank">

@@ -8,7 +8,6 @@
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">GitHub Link</th>
                     <th scope="col">Protected</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -16,7 +15,6 @@
                 <tbody class="table-group-divider" *ngIf="!loading;else showLoading">
                   <tr *ngFor="let branch of branches">
                     <td>{{branch.name}}</td>
-                    <td><a [href]="branch.githubLink" target="_blank">{{branch.githubLink}}</a> </td>
                     <td>
                         <fa-icon *ngIf="branch.protected;else NotProtected" [icon]="faXmark"></fa-icon>
                         <ng-template #NotProtected>
@@ -24,9 +22,17 @@
                         </ng-template>
                     </td>
                     <td>
-                        <a [routerLink]="['branch', branch.name]">
-                            <fa-icon [icon]="faEye"></fa-icon>
-                        </a>
+                        <span class="p-2" title="Show list of commits">
+                            <a [routerLink]="['branch', branch.name]">
+                                <fa-icon [icon]="faEye"></fa-icon>
+                            </a>
+                        </span>
+
+                        <span title="Redirect to github">
+                            <a  [href]="branch.githubLink" target="_blank">
+                                <fa-icon [icon]="faGithub"></fa-icon>
+                            </a>
+                        </span>
                     </td>
                   </tr>
                 </tbody>

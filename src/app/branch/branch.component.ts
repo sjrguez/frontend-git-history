@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BranchService } from './branch.service';
 import { faXmark, faCheck, faEye, faTruckLoading, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Branch } from './models/branch.model';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-branch',
@@ -14,6 +15,8 @@ export class BranchComponent implements OnInit {
   public faEye = faEye
   public faTruckLoading = faTruckLoading
   public faSpinner = faSpinner
+  public faGithub = faGithub;
+
   public branches: Branch[] = [];
 
   public errorInfo: any
