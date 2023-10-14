@@ -3,8 +3,8 @@
         <h1>List of Branches</h1>
     </div>
     <div class="row pt-3">
-        <div class="col table-responsive">
-            <table class="table table-bordered table-div text-center">
+        <div class="col table-responsive"  *ngIf="!errorInfo;else loadingOrError">
+            <table class="table table-bordered text-center">
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
@@ -15,7 +15,7 @@
                 </thead>
                 <tbody class="table-group-divider" *ngIf="!loading;else showLoading">
                   <tr *ngFor="let branch of branches">
-                    <td scope="row">{{branch.name}}</td>
+                    <td>{{branch.name}}</td>
                     <td><a [href]="branch.githubLink" target="_blank">{{branch.githubLink}}</a> </td>
                     <td>
                         <fa-icon *ngIf="branch.protected;else NotProtected" [icon]="faXmark"></fa-icon>
@@ -24,7 +24,7 @@
                         </ng-template>
                     </td>
                     <td>
-                        <a [href]="branch.githubLink" target="_blank">
+                        <a [routerLink]="['branch', branch.name]">
                             <fa-icon [icon]="faEye"></fa-icon>
                         </a>
                     </td>
@@ -41,5 +41,11 @@
 
               </table>
         </div>
+
+        <ng-template #loadingOrError >
+            <div *ngIf="errorInfo?.message" class="alert alert-danger" role="alert">
+                {{errorInfo.message}}
+              </div>
+        </ng-template>
     </div>
 </div>

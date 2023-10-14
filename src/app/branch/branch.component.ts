@@ -16,10 +16,10 @@ export class BranchComponent implements OnInit {
   public faSpinner = faSpinner
   public branches: Branch[] = [];
 
+  public errorInfo: any
   loading = false;
 
   constructor(private branchService: BranchService){}
-
 
   ngOnInit(): void {
     this.getAllBranches().then()
@@ -30,6 +30,9 @@ export class BranchComponent implements OnInit {
     this.branchService.getAllBranches().subscribe((branches) => {
       this.branches = branches;
       this.loading = false; 
+    }, ({error}) => {
+      this.loading = false
+      this.errorInfo = error;
     })
   }
 }
