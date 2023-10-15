@@ -9,3 +9,8 @@
 5. Start: ```npm start```
 
 
+## Tecnologies
+
+1. Angular - 16
+2. bootstrap (An angular version)
+3. FontAwesome
