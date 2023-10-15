@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BranchService } from './branch.service';
 import { faXmark, faCheck, faEye, faTruckLoading, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Branch } from './models/branch.model';
+import { Branch } from './models';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
@@ -18,6 +18,7 @@ export class BranchComponent implements OnInit {
   public faGithub = faGithub;
 
   public branches: Branch[] = [];
+  public totalItems = 0
 
   public errorInfo: any
   loading = false;
@@ -31,7 +32,8 @@ export class BranchComponent implements OnInit {
   async getAllBranches() {
     this.loading = true
     this.branchService.getAllBranches().subscribe((branches) => {
-      this.branches = branches;
+      this.branches = branches.data;
+      this.totalItems = branches.totalItems
       this.loading = false; 
     }, ({error}) => {
       this.loading = false
