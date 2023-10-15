@@ -18,6 +18,7 @@ export class CommitComponent implements OnInit, OnDestroy {
   public faEye = faEye
   public faGithub = faGithub;
   public branchName = '';
+  public totalItems = 0
 
   public loadingBranch = false;
   public loadingCommits = false;
@@ -56,7 +57,8 @@ export class CommitComponent implements OnInit, OnDestroy {
     this.loadingCommits = true;
     const subs = this.commitService.getAllCommits(branchSha).subscribe(commits => {
       this.loadingCommits = false;
-      this.commits = commits;
+      this.commits = commits.data;
+      this.totalItems = commits.totalItems;
 
     }, ({error}) => {
       this.errorInfo = error
