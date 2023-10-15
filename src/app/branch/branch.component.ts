@@ -19,6 +19,8 @@ export class BranchComponent implements OnInit {
 
   public branches: Branch[] = [];
   public totalItems = 0
+  public pageSize = 10
+  public page = 1
 
   public errorInfo: any
   loading = false;
@@ -29,9 +31,9 @@ export class BranchComponent implements OnInit {
     this.getAllBranches().then()
   }
 
-  async getAllBranches() {
+  async getAllBranches(page = 1) {
     this.loading = true
-    this.branchService.getAllBranches().subscribe((branches) => {
+    this.branchService.getAllBranches(page).subscribe((branches) => {
       this.branches = branches.data;
       this.totalItems = branches.totalItems
       this.loading = false; 
@@ -40,4 +42,9 @@ export class BranchComponent implements OnInit {
       this.errorInfo = error;
     })
   }
+
+  pageChanged(page: number) {
+    this.getAllBranches(page)
+  }
+
 }

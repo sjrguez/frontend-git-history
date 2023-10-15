@@ -11,8 +11,12 @@ export class BranchService {
   private url = `${URL}/api/branch`
   constructor(private http: HttpClient) {}
 
-  getAllBranches(): Observable<BranchResponse> {
-    return this.http.get<BranchResponse>(this.url)
+  getAllBranches(page: number): Observable<BranchResponse> {
+    return this.http.get<BranchResponse>(this.url, {
+      params: {
+        page
+      }
+    })
   }
 
   getBranchByName(name: string): Observable<Branch> {
