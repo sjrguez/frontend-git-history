@@ -56,6 +56,15 @@
                     </tr>
                 </ng-template>
               </table>
+              
+              <ngb-pagination
+                    class="d-flex justify-content-center"
+                    (pageChange)="pageChanged($event)"  
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    [collectionSize]="totalItems">
+                    [disabled]="loadingCommits"
+                </ngb-pagination>
         </div>
 
         <ng-template #loadingOrError >

@@ -11,7 +11,11 @@ export class CommitService {
   private url = `${URL}/api/commit/branch`
   constructor(private http: HttpClient) { }
 
-  getAllCommits(branchSha: string): Observable<CommitResponse> {
-    return this.http.get<CommitResponse>(`${this.url}/${branchSha}`)
+  getAllCommits(branchSha: string, page: number): Observable<CommitResponse> {
+    return this.http.get<CommitResponse>(`${this.url}/${branchSha}`, {
+      params: {
+        page
+      }
+    })
   }
 }

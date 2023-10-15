@@ -24,9 +24,12 @@ export class CommitComponent implements OnInit, OnDestroy {
   public loadingCommits = false;
 
   public errorInfo: any
-  public branchInfo?: Branch
+  public branchInfo!: Branch;
   public commits: Commit[] = []
 
+
+  page = 1
+  pageSize = 10
   private subscriptions: Subscription[] = [];
 
   constructor(private route: ActivatedRoute, private branchService: BranchService, private commitService: CommitService){}
@@ -53,9 +56,9 @@ export class CommitComponent implements OnInit, OnDestroy {
   }
 
 
-  getAllCommits(branchSha: string) {
+  getAllCommits(branchSha: string, page = 1) {
     this.loadingCommits = true;
-    const subs = this.commitService.getAllCommits(branchSha).subscribe(commits => {
+    const subs = this.commitService.getAllCommits(branchSha, page).subscribe(commits => {
       this.loadingCommits = false;
       this.commits = commits.data;
       this.totalItems = commits.totalItems;
@@ -72,5 +75,8 @@ export class CommitComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  pageChanged(page: number) {
+    this.getAllCommits(this.branchInfo.sha, page)
+  }
 
 }
